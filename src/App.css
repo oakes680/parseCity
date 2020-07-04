@@ -1,28 +1,151 @@
-[type="file"] {
-  border: 0;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.App {
+  width: 800px;
+  margin: 200px auto;
+  /* border: 1px red solid; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  /* flex-wrap: nowrap; */
+}
+
+div {
+  margin: 15px;
+}
+.search {
+  width: 225px;
+  border-radius: 10px;
+  height: 30px;
+  margin: 10px;
+  font-size: 20px;
+  outline: none !important;
+  border: 1px solid rgb(27, 27, 27);
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+  opacity: 1;
+  padding-left: 10px;
+}
+
+.search:hover {
+  background: #f7f7f7;
+}
+
+.searchSelect {
+  border-radius: 10px;
+  height: 32px;
+  /* margin: 10px; */
+  font-size: 20px;
+  outline: none !important;
+  border: 1px solid rgb(27, 27, 27);
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+  opacity: 1;
+  padding-left: 10px;
   overflow: hidden;
-  padding: 0;
-  position: absolute !important;
-  white-space: nowrap;
-  width: 1px;
 }
 
-[type="file"] + label {
-  background-color: #000;
-  border-radius: 4rem;
-  color: #fff;
+.noWrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.date {
+  width: 225px;
+  border-radius: 10px;
+  height: 32px;
+  /* margin: 10px; */
+  font-size: 20px;
+  outline: none !important;
+  border: 1px solid rgb(27, 27, 27);
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+  opacity: 1;
+  padding-left: 10px;
+  overflow: hidden;
+  /* border: 1px solid black; */
+}
+
+.filewrap {
+  position: relative;
+  background: #a4c3b2;
+  border: 1px solid #a4c3b2;
+  padding: 14px 45px;
+  margin-right: 10px;
+  color: #eaf4f4;
+  font-family: sans-serif;
+  font-size: 20px;
+  border-radius: 18px;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+  opacity: 1;
+}
+
+.filewrap:hover {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  background: #88a193;
+  transition: 0.3s;
+}
+
+input[type="file"] {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  font-size: 20px;
+  top: 0;
+  left: 0;
+  opacity: 0;
   cursor: pointer;
-  display: inline-block;
-  padding-left: 2rem 4rem;
 }
 
-[type="file"]:focus + label,
-[type="file"] + label:hover {
-  background-color: #f15d22;
+.button {
+  background: #a4c3b2;
+  border: 1px solid #a4c3b2;
+  width: 206px;
+  height: 53px;
+  /* padding: 15px 50px; */
+  margin-right: 10px;
+  color: #eaf4f4;
+  font-family: sans-serif;
+  font-size: 20px;
+  border-radius: 18px;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+  opacity: 1;
+  outline: none !important;
 }
 
-[type="file"]:focus + label {
-  outline: 1px dotted #000;
+.button:hover {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  background: #88a193;
+  transition: 0.3s;
+}
+
+.button:active {
+  background: #88a193;
+  /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); */
+}
+
+.big-button {
+  background: #684756;
+  border: 1px solid #684756;
+  width: 400px;
+  height: 53px;
+  /* padding: 15px 50px; */
+  /* margin-right: 10px; */
+  color: #eaf4f4;
+  font-family: sans-serif;
+  font-size: 20px;
+  border-radius: 18px;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+  opacity: 1;
+  outline: none !important;
+}
+
+.big-button:hover {
+  background: #4d3640;
+  transition: 0.3s;
 }

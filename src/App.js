@@ -1,31 +1,22 @@
-import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
+import React, { useState } from "react";
 import "./App.css";
 import { ExcelRenderer } from "react-excel-renderer";
-import excelToJson from "convert-excel-to-json";
-import axios from 'axios'
-// const excelToJson = require('convert-excel-to-json');
-
+import axios from "axios";
 
 function App() {
   const [excel2, setExcel] = useState([]);
-  const [sendObj, setSendObj] = useState({})
-  const [name, setName] = useState('chris')
-  const [customerId, setCustomerId] = useState('')
-  const [customers, setCustomers] = useState([])
+  const [sendObj, setSendObj] = useState({});
+  const [customers, setCustomers] = useState([]);
 
-
-
-  let email = "sales@kingclothing.com";
-  let token = "snk_Qx9LxLJMPyrsgiebgA";
-  let query = "larry";
-  let apiAddress = "https://www.printavo.com/api/v1/customers/search";
-  let version = "v1";
-
+  // let email = "sales@kingclothing.com";
+  // let token = "snk_Qx9LxLJMPyrsgiebgA";
+  // let query = "larry";
+  // let apiAddress = "https://www.printavo.com/api/v1/customers/search";
+  // let version = "v1";
 
   const testObj2 = {
     user_id: 10784,
-    customer_id: '', //1966096,
+    customer_id: "", //1966096,
     orderstatus_id: 1547,
     formatted_due_date: "12/11/2020",
     formatted_customer_due_date: "11/11/2020",
@@ -38,7 +29,7 @@ function App() {
 
   let ob = {
     style_number: null,
-    style_description: null,  //30
+    style_description: null, //30
     product_price: null, //24/25
     category_id: null,
     unit_cost: null,
@@ -63,7 +54,6 @@ function App() {
     size_5xl: null,
   };
 
-
   let letters = /^[A-Za-z]+$/;
 
   const hashmap2 = {
@@ -82,7 +72,6 @@ function App() {
     "4XL": "size_4xl",
     "5XL": "size_5xl",
   };
-
 
   function theOne(size, count) {
     if (ob[hashmap2[size]] === null) {
@@ -110,29 +99,26 @@ function App() {
       size = "";
       count = 0;
     }
-
-
   }
 
-
-
-
   const upload = (e) => {
-
     console.log("con", excel2.rows);
 
     for (let i = 1; i < excel2.rows.length; i++) {
-
-      let exists = false
+      let exists = false;
 
       for (let b = 0; b < testObj2["lineitems_attributes"].length; b++) {
-        if (testObj2["lineitems_attributes"][b].style_number === excel2.rows[i][33] && testObj2["lineitems_attributes"][b].color === excel2.rows[i][31]) {
-          exists = true
+        if (
+          testObj2["lineitems_attributes"][b].style_number ===
+          excel2.rows[i][33] &&
+          testObj2["lineitems_attributes"][b].color === excel2.rows[i][31]
+        ) {
+          exists = true;
         }
       }
 
       if (exists === true) {
-        continue
+        continue;
       }
 
       if (ob["style_number"] === null) {
@@ -148,19 +134,19 @@ function App() {
         ob["unit_cost"] = excel2.rows[i][25];
       }
 
-
-      getSplitSize(theOne, i)
+      getSplitSize(theOne, i);
 
       for (let r = 1; r < excel2.rows.length; r++) {
         if (r === i) {
-          continue
+          continue;
         }
-        if (ob["style_number"] === excel2.rows[r][33] && ob["color"] === excel2.rows[r][31]) {
-          getSplitSize(theOne, r)
+        if (
+          ob["style_number"] === excel2.rows[r][33] &&
+          ob["color"] === excel2.rows[r][31]
+        ) {
+          getSplitSize(theOne, r);
         }
       }
-
-      console.log("before testobj2", testObj2);
 
       testObj2["lineitems_attributes"].push({ ...ob });
 
@@ -171,13 +157,8 @@ function App() {
       // console.log('testobj2', testObj2)
     }
     console.log("testobj2", testObj2);
-    setSendObj(testObj2)
-
-
+    setSendObj(testObj2);
   };
-
-
-
 
   ////////////////////////////////////********************************************************* */////////////////////////
 
@@ -198,84 +179,109 @@ function App() {
   };
 
   function sendIt() {
-    console.log(testObj2)
-    console.log(sendObj)
+    console.log(testObj2);
+    console.log(sendObj);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    var raw = JSON.stringify(sendObj)
+    var raw = JSON.stringify(sendObj);
 
     var requestOptions = {
-      method: 'POST',
+      method: "POST",
       headers: myHeaders,
       body: raw,
-      redirect: 'follow'
+      redirect: "follow",
     };
 
-    fetch("https://www.printavo.com/api/v1/orders?version=v1&email=sales@kingclothing.com&token=snk_Qx9LxLJMPyrsgiebgA", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
+    fetch(
+      "https://www.printavo.com/api/v1/orders?version=v1&email=sales@kingclothing.com&token=snk_Qx9LxLJMPyrsgiebgA",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
   }
 
   // setName('bob')
 
   function customerSearch(e) {
-    console.log('this is customer search', e.target.value)
+    console.log("this is customer search", e.target.value);
 
-    axios.get(`https://www.printavo.com/api/v1/customers/search?version=v1&email=sales@kingclothing.com&token=snk_Qx9LxLJMPyrsgiebgA&query=${e.target.value}`)
-      .then(res => setCustomers(res.data.data))
-      .catch(error => console.log('error', error));
-
+    axios
+      .get(
+        `https://www.printavo.com/api/v1/customers/search?version=v1&email=sales@kingclothing.com&token=snk_Qx9LxLJMPyrsgiebgA&query=${e.target.value}`
+      )
+      .then((res) => setCustomers(res.data.data))
+      .catch((error) => console.log("error", error));
   }
 
-
-
   function onChangeDrop(e) {
-    sendObj["customer_id"] = e.target.value
+    sendObj["customer_id"] = e.target.value;
   }
 
   function onChangeDate(e) {
-
-    let oldDate = e.target.value.replace(/-/g, "/")
-    let splitDate = e.target.value.split("-")
-    let arr = []
-    arr.push(splitDate[1])
-    arr.push(splitDate[2])
-    arr.push(splitDate[0])
-    let finalDate = arr.join('/')
-    sendObj["formatted_due_date"] = finalDate
-    sendObj["formatted_customer_due_date"] = finalDate
-    console.log('hi')
-    console.log(sendObj)
+    // let oldDate = e.target.value.replace(/-/g, "/")
+    let splitDate = e.target.value.split("-");
+    let arr = [];
+    arr.push(splitDate[1]);
+    arr.push(splitDate[2]);
+    arr.push(splitDate[0]);
+    let finalDate = arr.join("/");
+    sendObj["formatted_due_date"] = finalDate;
+    sendObj["formatted_customer_due_date"] = finalDate;
+    console.log("hi");
+    console.log(sendObj);
   }
-
-
-
 
   return (
     <div className="App">
-
-      <input className="custom-file-input" onChange={fileHandler} type="file" id="file" multiple></input>
-      <label htmlFor="file">choose a file</label>
       <div>
-        <button onClick={upload}>Upload!</button>
+        {" "}
+        <span>Step 1: </span>
+        <span className="filewrap">
+          {" "}
+          Choose a file
+          <input
+            className="custom-file-input"
+            onChange={fileHandler}
+            type="file"
+            id="file"
+            multiple
+          ></input>
+        </span>
+        <span>Step 2: </span>
+        <button className="button" onClick={upload}>
+          Begin Converting
+        </button>
       </div>
 
-
-      <input onChange={customerSearch} type="text" />
-      <select name="" id="" onChange={onChangeDrop}>
-        {customers.map(x => <option value={x.id} >{x.company},  {x.first_name} {x.last_name} </option>)}
-      </select>
+      <div className="noWrap">
+        {" "}
+        <span> Search for a customer: </span>
+        <input className="searchInput" onChange={customerSearch} type="text" className="search" />
+        <select className="searchSelect" name="" id="" onChange={onChangeDrop}>
+          {customers.map((x) => (
+            <option value={x.id}>
+              {x.company}, {x.first_name} {x.last_name}{" "}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <div>
-        <button onClick={sendIt}>Send it</button>
+        {" "}
+        <span> Choose a Due Date: </span>
+        <input
+          className="date"
+          onChange={onChangeDate}
+          type="date"
+          id="meeting-time"
+          name="meeting-time"
+        ></input>
       </div>
-      <input onChange={onChangeDate} type="date" id="meeting-time"
-        name="meeting-time"
-      ></input>
-
-
-    </div >
+      <div>
+        <button className="big-button" onClick={sendIt}>Send it</button>
+      </div>
+    </div>
   );
 }
 
