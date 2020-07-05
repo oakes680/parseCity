@@ -72,7 +72,9 @@ div {
   position: relative;
   background: #a4c3b2;
   border: 1px solid #a4c3b2;
-  padding: 14px 45px;
+  /* padding: 14px 45px; */
+  height: 40px;
+  width: 214px;
   margin-right: 10px;
   color: #eaf4f4;
   font-family: sans-serif;
@@ -148,4 +150,19 @@ input[type="file"] {
 .big-button:hover {
   background: #4d3640;
   transition: 0.3s;
+}
+
+.tran {
+  transition: 2s;
+}
+
+.fadeOut {
+  position: absolute;
+  opacity: 0;
+}
+.fadeIn {
+  position: static;
+  opacity: 1;
+  transition: opacity 1s linear;
+  /* transition: width 0.5s, height 0.5s, opacity 0.5s 1s; */
 }

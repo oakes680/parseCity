@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import "./App.css";
 import { ExcelRenderer } from "react-excel-renderer";
 import axios from "axios";
+import BeginConverting from './components/BeginConverting';
+import ChooseFile from './components/ChooseFile'
 
 function App() {
   const [excel2, setExcel] = useState([]);
   const [sendObj, setSendObj] = useState({});
   const [customers, setCustomers] = useState([]);
+  const [bc, setBc] = useState(true)
+  const [fh, setFh] = useState(true)
 
   // let email = "sales@kingclothing.com";
   // let token = "snk_Qx9LxLJMPyrsgiebgA";
@@ -158,6 +162,8 @@ function App() {
     }
     console.log("testobj2", testObj2);
     setSendObj(testObj2);
+    setBc(false)
+
   };
 
   ////////////////////////////////////********************************************************* */////////////////////////
@@ -168,7 +174,7 @@ function App() {
 
     ExcelRenderer(fileObj, (err, resp) => {
       if (err) {
-        console.log(err);
+        console.log('this is an error', err);
       } else {
         setExcel({
           cols: resp.cols,
@@ -176,6 +182,8 @@ function App() {
         });
       }
     });
+
+    setFh(false)
   };
 
   function sendIt() {
@@ -235,23 +243,12 @@ function App() {
   return (
     <div className="App">
       <div>
-        {" "}
-        <span>Step 1: </span>
-        <span className="filewrap">
-          {" "}
-          Choose a file
-          <input
-            className="custom-file-input"
-            onChange={fileHandler}
-            type="file"
-            id="file"
-            multiple
-          ></input>
-        </span>
-        <span>Step 2: </span>
-        <button className="button" onClick={upload}>
-          Begin Converting
-        </button>
+        <ChooseFile fileHandler={fileHandler} fh={fh} />
+
+
+        <BeginConverting upload={upload} bc={bc} />
+
+
       </div>
 
       <div className="noWrap">
