@@ -258,7 +258,7 @@ function App() {
         {" "}
         <span> Search for a customer: </span>
         <input className="searchInput" onChange={customerSearch} type="text" className="search" />
-        <select className="searchSelect" name="" id="" onChange={onChangeDrop}>
+        <select className="searchSelect" name="" id="" onClick={onChangeDrop}>
           {customers.map((x) => (
             <option value={x.id}>
               {x.company}, {x.first_name} {x.last_name}{" "}
