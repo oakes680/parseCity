@@ -135,7 +135,7 @@ function App() {
         ob["color"] = excel2.rows[i][31];
       }
       if (ob["unit_cost"] === null) {
-        ob["unit_cost"] = excel2.rows[i][25];
+        ob["unit_cost"] = (excel2.rows[i][25] / excel2.rows[i][23]);
       }
 
       getSplitSize(theOne, i);
@@ -222,7 +222,7 @@ function App() {
       .catch((error) => console.log("error", error));
   }
 
-  function onChangeDrop(e) {
+  function onClickDrop(e) {
     sendObj["customer_id"] = e.target.value;
   }
 
@@ -255,7 +255,7 @@ function App() {
         {" "}
         <span> Search for a customer: </span>
         <input className="searchInput" onChange={customerSearch} type="text" className="search" />
-        <select className="searchSelect" name="" id="" onClick={onChangeDrop}>
+        <select className="searchSelect" name="" id="" onClick={onClickDrop}>
           {customers.map((x) => (
             <option value={x.id}>
               {x.company}, {x.first_name} {x.last_name}{" "}
