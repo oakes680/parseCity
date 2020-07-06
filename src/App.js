@@ -107,9 +107,13 @@ function App() {
 
   const upload = (e) => {
     console.log("con", excel2.rows);
-
+    let subtotal = 0
+    let tax = 0
     for (let i = 1; i < excel2.rows.length; i++) {
       let exists = false;
+      subtotal += Number(excel2.rows[i][17])
+      tax += Number(excel2.rows[i][20])
+
 
       for (let b = 0; b < testObj2["lineitems_attributes"].length; b++) {
         if (
@@ -161,6 +165,9 @@ function App() {
       // console.log('testobj2', testObj2)
     }
     console.log("testobj2", testObj2);
+    let taxPercent = (tax / subtotal) * 100
+    testObj2["sales_tax"] = taxPercent
+
     setSendObj(testObj2);
     setBc(false)
 
@@ -206,12 +213,13 @@ function App() {
     )
       // .then((response) => response.text()
       .then((result) => {
-        if (result.status === 201) {
+        console.log(result)
+        // if (result.status === 201) {
 
-          window.location.href = 'https://parse-city.vercel.app/'
-        } else {
-          alert("error, most likely you didn't select a date or customer name")
-        }
+        //   window.location.href = 'https://parse-city.vercel.app/'
+        // } else {
+        //   alert("error, most likely you didn't select a date or customer name")
+        // }
       })
       .catch((error) => console.log(error));
   }
