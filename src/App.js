@@ -204,9 +204,15 @@ function App() {
       "https://www.printavo.com/api/v1/orders?version=v1&email=sales@kingclothing.com&token=snk_Qx9LxLJMPyrsgiebgA",
       requestOptions
     )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+      // .then((response) => response.text()
+      .then((result) => {
+        if (result.status === 201) {
+          window.location.href = 'https://parse-city.vercel.app/'
+        } else {
+          alert("error, most likely you didn't select a date or customer name")
+        }
+      })
+      .catch((error) => console.log(error));
   }
 
   // setName('bob')
