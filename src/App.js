@@ -26,7 +26,7 @@ function App() {
     formatted_customer_due_date: "11/11/2020",
     //formatted_invoice_date: "11/11/2020",
     // formatted_payment_due_date: "12/11/2020",
-    sales_tax: "8.6",
+    sales_tax: null,
     discount: "0",
     lineitems_attributes: [],
   };
@@ -207,6 +207,7 @@ function App() {
       // .then((response) => response.text()
       .then((result) => {
         if (result.status === 201) {
+
           window.location.href = 'https://parse-city.vercel.app/'
         } else {
           alert("error, most likely you didn't select a date or customer name")
