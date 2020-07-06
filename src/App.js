@@ -213,13 +213,12 @@ function App() {
     )
       // .then((response) => response.text()
       .then((result) => {
-        console.log(result)
-        // if (result.status === 201) {
+        if (result.status === 201) {
 
-        //   window.location.href = 'https://parse-city.vercel.app/'
-        // } else {
-        //   alert("error, most likely you didn't select a date or customer name")
-        // }
+          window.location.href = 'https://parse-city.vercel.app/'
+        } else {
+          alert("error, most likely you didn't select a date or customer name")
+        }
       })
       .catch((error) => console.log(error));
   }
